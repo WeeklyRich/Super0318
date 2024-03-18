@@ -1,9 +1,24 @@
 package Test.controller;
 
 
+import Test.pojo.User;
+import Test.service.IPermissionService;
+import Test.service.IUserService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
+import until.JWTUtil;
+import until.JsonResponseResult;
 
 /**
  * <p>
@@ -13,9 +28,65 @@ import org.springframework.stereotype.Controller;
  * @author zhou
  * @since 2024-03-18
  */
-@Controller
+@RestController
 @RequestMapping("/user")
+@CrossOrigin (originPatterns = {"*"})
 public class UserController {
+    @Autowired
+    private IUserService userService;
+
+    @Autowired
+    private IPermissionService permissionService;
+
+    @RequestMapping("/login")
+    public JsonResponseResult login( User user){
+
+        //1.封装账号密码到UsernamepasswordToken中.
+
+        //2.使用subject.log(  token  );
+
+        //3.成功(生成jwt进行分发)或失败(返回异常):
+
+        //如何实现登录: token封装账号和密码.
+        UsernamePasswordToken token = new UsernamePasswordToken( user.getUserName() , user.getUserPassword() );
+
+        //开始登录:
+        JsonResponseResult result = null;
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            subject.login( token );
+            //如果登录成功则不产生异常. 登录失败:产生异常.
+
+            //以往: 登录成功时, session不在继续存储身份.
+            //签发token时, 采用加密后的密码:
+            QueryWrapper wrapper = new QueryWrapper();
+            wrapper.eq("username" , user.getUserName());
+            User u1 = this.userService.getOne(wrapper);
+
+
+            String jwtToken = JWTUtil.sign(user.getUserName(), u1.getUserPassword());
+            result = new JsonResponseResult( 200 , "登录成功" , jwtToken );
+
+
+        }catch( UnknownAccountException e){
+            result = new JsonResponseResult( 500 , "账号不存在" , null );
+        }catch( IncorrectCredentialsException e){
+            result = new JsonResponseResult( 500 , "密码错误" , null );
+        }catch( AuthenticationException e){
+            result = new JsonResponseResult( 500 , "登录失败" , null );
+        }
+
+        return result;
+    }
+
+
+    /*退出登录*/
+    @RequestMapping("/logout")
+    public JsonResponseResult logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return new JsonResponseResult(200, "退出成功", null);
+    }
 
 }
 
