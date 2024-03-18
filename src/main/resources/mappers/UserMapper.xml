@@ -26,8 +26,16 @@
     </sql>
 
     <select id="Multiple conditions">
+        select * from user where id > #last_id# order by id limit 5
+    </select>
 
-        select * from user
+    <select id="Duplicate deletion1">
+        select distinct user.id, user.userCode, user.userName, user.userPassword from user;
+    </select>
 
+    <select id="Duplicate deletion2">
+        SELECT userName,userCode,address
+        FROM user
+        GROUP BY userName, userCode, address;
     </select>
 </mapper>
