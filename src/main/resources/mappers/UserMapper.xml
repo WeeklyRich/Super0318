@@ -25,4 +25,9 @@
         id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy, creationDate, modifyBy, modifyDate, userPhotoAddressField
     </sql>
 
+    <select id="Multiple conditions">
+
+        select * from user
+
+    </select>
 </mapper>
