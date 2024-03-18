@@ -25,17 +25,22 @@
         id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy, creationDate, modifyBy, modifyDate, userPhotoAddressField
     </sql>
 
-    <select id="Multiple conditions">
+
+    <!--优化分页查询（5条）-->
+    <select id="Multiple_conditions">
         select * from user where id > #last_id# order by id limit 5
     </select>
 
-    <select id="Duplicate deletion1">
+
+    <!--重复数据去除-->
+    <select id="Duplicate_deletion1">
         select distinct user.id, user.userCode, user.userName, user.userPassword from user;
     </select>
 
-    <select id="Duplicate deletion2">
+    <select id="Duplicate_deletion2">
         SELECT userName,userCode,address
         FROM user
         GROUP BY userName, userCode, address;
     </select>
+
 </mapper>
