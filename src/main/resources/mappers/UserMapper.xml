@@ -43,4 +43,18 @@
         GROUP BY userName, userCode, address;
     </select>
 
+
+
+
+    <!--
+    笔记
+    1. 整数类型（INT，TINYINT，BIGINT等）
+    2. 浮点数类型（FLOAT，DOUBLE等）
+    3. 字符串类型（VARCHAR，CHAR，TEXT等）
+    4. 日期和时间类型（DATE，TIME，DATETIME等）
+    5. 布尔类型（BOOLEAN）
+    6. 二进制类型（BLOB）
+    7. 枚举类型（ENUM）
+    8. 集合类型（SET）
+    -->
 </mapper>
