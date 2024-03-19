@@ -5,6 +5,7 @@ import Test.pojo.User;
 import Test.service.IPermissionService;
 import Test.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -12,11 +13,9 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 import until.JWTUtil;
 import until.JsonResponseResult;
 
@@ -86,6 +85,36 @@ public class UserController {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return new JsonResponseResult(200, "退出成功", null);
+    }
+
+    @RequestMapping("/query")
+    public JsonResponseResult query( @RequestParam ("page_no") int curPage , @RequestParam("page_size")int pageSize , @RequestParam(defaultValue = "") String uname){
+        //List<User> userList = this.userService.queryByPage( curPage,pageSize,uname );
+        QueryWrapper qw = new QueryWrapper();
+        qw.like("username" , uname);
+
+        Page<User> page = new Page<>();
+        page.setSize( pageSize );
+        page.setCurrent( curPage );
+
+        Page<User> page1 = this.userService.page(page , qw);
+
+        JsonResponseResult jsonResponse= new JsonResponseResult(200 , "查询成功" , page1.getRecords());
+        return jsonResponse;
+    }
+
+    @Autowired
+    private RedisUtils redisUtils;
+    @GetMapping("/users/{id}")
+    public User getUserById(@PathVariable Long id) {
+
+        String key = "user_" + id;
+        User user = (User) redisUtils.getValue(key);
+        if (user == null) {
+            user = userService.getUserById(id);
+            redisUtils.cacheValue(key, user);
+        }
+        return user;
     }
 
 }

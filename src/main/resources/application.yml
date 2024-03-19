@@ -1,0 +1,7 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password: zhouhan2003
+    timeout: 3000
+    database: 0
