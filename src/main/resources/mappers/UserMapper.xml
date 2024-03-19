@@ -18,11 +18,12 @@
         <result column="modifyBy" property="modifyBy" />
         <result column="modifyDate" property="modifyDate" />
         <result column="userPhotoAddressField" property="userPhotoAddressField" />
+        <result column="saltVal" property="saltVal" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy, creationDate, modifyBy, modifyDate, userPhotoAddressField
+        id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy, creationDate, modifyBy, modifyDate, userPhotoAddressField,saltVal
     </sql>
 
 
