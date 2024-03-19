@@ -70,10 +70,7 @@
 
 
     <!--   json, jwt, shiro, mybatis-plus,druid,mysql: -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-    </dependency>
+
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
@@ -97,6 +94,7 @@
       <artifactId>java-jwt</artifactId>
       <version>3.2.0</version>
     </dependency>
+
     <dependency>
       <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-spring-boot-web-starter</artifactId>
@@ -108,11 +106,6 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.73</version>
     </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <scope>provided</scope>
-    </dependency>
 
     <!-- springboot整合redis-->
     <dependency>
@@ -123,6 +116,12 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
     </dependency>
 
   </dependencies>

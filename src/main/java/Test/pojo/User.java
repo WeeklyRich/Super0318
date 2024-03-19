@@ -2,6 +2,8 @@ package Test.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
  * @author zhou
  * @since 2024-03-18
  */
+@Data
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
