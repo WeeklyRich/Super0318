@@ -70,7 +70,10 @@
 
 
     <!--   json, jwt, shiro, mybatis-plus,druid,mysql: -->
-
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
@@ -94,7 +97,6 @@
       <artifactId>java-jwt</artifactId>
       <version>3.2.0</version>
     </dependency>
-
     <dependency>
       <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-spring-boot-web-starter</artifactId>
@@ -107,15 +109,11 @@
       <version>1.2.73</version>
     </dependency>
 
+
     <!-- springboot整合redis-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
     </dependency>
 
     <dependency>
