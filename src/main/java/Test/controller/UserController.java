@@ -87,7 +87,9 @@ public class UserController {
         return new JsonResponseResult(200, "退出成功", null);
     }
 
-    @RequestMapping("/query")
+
+    //用户分页查询:
+    @RequestMapping("/query_by_page")
     public JsonResponseResult query( @RequestParam ("page_no") int curPage , @RequestParam("page_size")int pageSize , @RequestParam(defaultValue = "") String uname){
         //List<User> userList = this.userService.queryByPage( curPage,pageSize,uname );
         QueryWrapper qw = new QueryWrapper();
@@ -102,6 +104,24 @@ public class UserController {
         JsonResponseResult jsonResponse= new JsonResponseResult(200 , "查询成功" , page1.getRecords());
         return jsonResponse;
     }
+
+
+    //用户页码总数:
+    @RequestMapping("/queryCounts")
+    public JsonResponseResult queryCounts(@RequestParam(defaultValue = "") String uname){
+
+        //int counts = this.userService.queryCounts( uname );
+
+        QueryWrapper qw = new QueryWrapper();
+        qw.like("username" , uname);
+        long count = this.userService.count(qw);
+
+        JsonResponseResult jsonResponse= new JsonResponseResult(200 , "查询成功" , count);
+        return jsonResponse;
+    }
+
+
+
 
     @Autowired
     private RedisUtils redisUtils;
