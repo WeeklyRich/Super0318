@@ -1,7 +1,7 @@
 package config;
 
 
-import Test.service.IUserService;
+import com.service.IUserService;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import until.JWTFilter;
-import web.MyRealm;
+import com.until.JWTFilter;
+import com.web.MyRealm;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -70,10 +70,12 @@ public class ShiroConfiguration {
 
 
         Map<String, String> filterRuleMap = new HashMap<>();
-        filterRuleMap.put("/user/login", "anon"); //依然保持匿名访问.
+        filterRuleMap.put("/user/login", "anon");
+        //依然保持匿名访问.
 
         //filterRuleMap.put("/**","authc"); authc的认证规则: 是从shiro维护的session中解析身份检查是否登录.
-        filterRuleMap.put("/**", "jwt"); //jwt自定义过滤器: 检查请求头中有token么, 有则验证token的正确性.
+        filterRuleMap.put("/**", "jwt");
+        //jwt自定义过滤器: 检查请求头中有token么, 有则验证token的正确性.
 
         //测试规则:
         //filterRuleMap.put("/**" , "anon");

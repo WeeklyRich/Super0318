@@ -11,5 +11,5 @@ spring:
 # mybatis-plus配置:
 mybatis-plus:
   mapper-locations: classpath:mappers/*Mapper.xml
-  type-aliases-package: Test.pojo
+  type-aliases-package: com.pojo
 

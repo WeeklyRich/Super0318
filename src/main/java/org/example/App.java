@@ -9,9 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-@MapperScan (basePackages = {"Test.mapper"})
+@MapperScan (basePackages = {"com.mapper"})
 public class App
 {
+
     public static void main( String[] args )
     {
         SpringApplication.run( App.class , args );
