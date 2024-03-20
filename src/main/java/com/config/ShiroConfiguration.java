@@ -2,6 +2,8 @@ package com.config;
 
 
 import com.service.IUserService;
+import com.until.JWTFilter;
+import com.web.MyRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -11,8 +13,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.until.JWTFilter;
-import com.web.MyRealm;
 
 import javax.servlet.Filter;
 import java.util.HashMap;

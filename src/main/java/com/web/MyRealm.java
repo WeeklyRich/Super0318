@@ -1,9 +1,8 @@
 package com.web;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.pojo.User;
 import com.service.IUserService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

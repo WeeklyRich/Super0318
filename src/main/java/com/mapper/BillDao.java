@@ -1,7 +1,7 @@
 package com.mapper;
 
-import com.pojo.Bill;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.pojo.Bill;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

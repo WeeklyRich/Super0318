@@ -1,9 +1,9 @@
 package com.service.impl;
 
-import com.pojo.Provider;
-import com.mapper.ProviderDao;
-import com.service.IProviderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mapper.ProviderDao;
+import com.pojo.Provider;
+import com.service.IProviderService;
 import org.springframework.stereotype.Service;
 
 /**

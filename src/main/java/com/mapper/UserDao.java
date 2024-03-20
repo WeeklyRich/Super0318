@@ -1,7 +1,7 @@
 package com.mapper;
 
-import com.pojo.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

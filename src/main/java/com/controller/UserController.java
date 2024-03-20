@@ -1,11 +1,11 @@
 package com.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pojo.User;
 import com.service.IPermissionService;
 import com.service.IUserService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.until.JWTUtil;
 import com.until.JsonResponseResult;
 import com.until.RedisUtils;
@@ -76,6 +76,7 @@ public class UserController {
 
         return result;
     }
+
 
 
     /*退出登录*/

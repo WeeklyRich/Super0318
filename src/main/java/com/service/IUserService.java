@@ -1,7 +1,7 @@
 package com.service;
 
-import com.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.pojo.User;
 
 /**
  * <p>
@@ -14,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IUserService extends IService<User> {
 
     User getUserById ( Long id );
+
+
 }

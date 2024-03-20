@@ -1,7 +1,7 @@
 package com.service;
 
-import com.pojo.Provider;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.pojo.Provider;
 
 /**
  * <p>
