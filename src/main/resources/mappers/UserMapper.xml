@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Test.mapper.UserDao">
+<mapper namespace="com.mapper.UserDao">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="Test.pojo.User">
+    <resultMap id="BaseResultMap" type="com.pojo.User">
         <id column="id" property="id" />
         <result column="userCode" property="userCode" />
         <result column="userName" property="userName" />
@@ -18,11 +18,44 @@
         <result column="modifyBy" property="modifyBy" />
         <result column="modifyDate" property="modifyDate" />
         <result column="userPhotoAddressField" property="userPhotoAddressField" />
+        <result column="saltVal" property="saltVal" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy, creationDate, modifyBy, modifyDate, userPhotoAddressField
+        id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy, creationDate, modifyBy, modifyDate, userPhotoAddressField,saltVal
     </sql>
 
+
+    <!--优化分页查询（5条）-->
+    <select id="Multiple_conditions">
+        select * from user where id > #last_id# order by id limit 5
+    </select>
+
+
+    <!--重复数据去除-->
+    <select id="Duplicate_deletion1">
+        select distinct user.id, user.userCode, user.userName, user.userPassword from user;
+    </select>
+
+    <select id="Duplicate_deletion2">
+        SELECT userName,userCode,address
+        FROM user
+        GROUP BY userName, userCode, address;
+    </select>
+
+
+
+
+    <!--
+    笔记
+    1. 整数类型（INT，TINYINT，BIGINT等）
+    2. 浮点数类型（FLOAT，DOUBLE等）
+    3. 字符串类型（VARCHAR，CHAR，TEXT等）
+    4. 日期和时间类型（DATE，TIME，DATETIME等）
+    5. 布尔类型（BOOLEAN）
+    6. 二进制类型（BLOB）
+    7. 枚举类型（ENUM）
+    8. 集合类型（SET）
+    -->
 </mapper>

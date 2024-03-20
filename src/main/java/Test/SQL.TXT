@@ -1,0 +1,112 @@
+create table tb_permission
+(
+    id        bigint auto_increment comment '主键'
+        primary key,
+    perm_name varchar(50) null comment '权限名称',
+    perm_url  varchar(50) null comment '权限地址',
+    parent_id bigint      null comment '父权限编号',
+    is_menu   int         null comment '是否为菜单'
+)
+    charset = utf8;
+
+create table tb_role
+(
+    id           bigint auto_increment comment '主键ID'
+        primary key,
+    roleCode     varchar(15) null comment '角色编码',
+    roleName     varchar(15) null comment '角色名称',
+    createdBy    bigint      null comment '创建者',
+    creationDate datetime    null comment '创建时间',
+    modifyBy     bigint      null comment '修改者',
+    modifyDate   datetime    null comment '修改时间'
+)
+    collate = utf8_unicode_ci;
+
+create table tb_user_role
+(
+    id            bigint auto_increment
+        primary key,
+    role_id       bigint null,
+    permission_id bigint null,
+    constraint role_permission_role_id_fk
+        foreign key (role_id) references tb_role (id)
+)
+    charset = utf8;
+
+create index role_permission_permission_id_fk
+    on tb_user_role (permission_id);
+
+create table user
+(
+    id                    bigint auto_increment comment '主键ID'
+        primary key,
+    userCode              varchar(15) null comment '用户编码',
+    userName              varchar(15) null comment '用户名称',
+    userPassword          varchar(15) null comment '用户密码',
+    gender                int(10)     null comment '性别（1:女、 2:男）',
+    birthday              date        null comment '出生日期',
+    phone                 varchar(15) null comment '手机',
+    address               varchar(30) null comment '地址',
+    userRole              bigint      null comment '用户角色（取自角色表-角色id）',
+    createdBy             bigint      null comment '创建者（userId）',
+    creationDate          datetime    null comment '创建时间',
+    modifyBy              bigint      null comment '更新者（userId）',
+    modifyDate            datetime    null comment '更新时间',
+    userPhotoAddressField varchar(50) not null,
+    constraint user_role_id_fk
+        foreign key (userRole) references tb_role (id)
+)
+    collate = utf8_unicode_ci;
+
+create table tb_bill
+(
+    id           bigint auto_increment comment '主键ID'
+        primary key,
+    billCode     varchar(20) collate utf8_unicode_ci null comment '账单编码',
+    productName  varchar(20) collate utf8_unicode_ci null comment '商品名称',
+    productDesc  varchar(50) collate utf8_unicode_ci null comment '商品描述',
+    productUnit  varchar(10) collate utf8_unicode_ci null comment '商品单位',
+    productCount double(20, 2)                       null comment '商品数量',
+    totalPrice   double(20, 2)                       null comment '商品总额',
+    isPayment    int(10)                             null comment '是否支付（1：未支付 2：已支付）',
+    createdBy    bigint                              null comment '创建者（userId）',
+    creationDate datetime                            null comment '创建时间',
+    modifyBy     bigint                              null comment '更新者（userId）',
+    modifyDate   datetime                            null comment '更新时间',
+    providerId   int(20)                             null comment '供应商ID',
+    constraint bill_user_id_fk
+        foreign key (createdBy) references user (id),
+    constraint bill_user_id_fk2
+        foreign key (modifyBy) references user (id)
+);
+
+create table tb_provider
+(
+    id           bigint auto_increment comment '主键ID'
+        primary key,
+    proCode      varchar(20) null comment '供应商编码',
+    proName      varchar(20) null comment '供应商名称',
+    proDesc      varchar(50) null comment '供应商详细描述',
+    proContact   varchar(20) null comment '供应商联系人',
+    proPhone     varchar(20) null comment '联系电话',
+    proAddress   varchar(50) null comment '地址',
+    proFax       varchar(20) null comment '传真',
+    createdBy    bigint      null comment '创建者（userId）',
+    creationDate datetime    null comment '创建时间',
+    modifyDate   datetime    null comment '更新时间',
+    modifyBy     bigint      null comment '更新者（userId）',
+    constraint provider_user_id_fk
+        foreign key (createdBy) references user (id),
+    constraint provider_user_id_fk2
+        foreign key (modifyBy) references user (id)
+)
+    collate = utf8_unicode_ci;
+
+alter table tb_role
+    add constraint role_user_id_fk
+        foreign key (createdBy) references user (id);
+
+alter table tb_role
+    add constraint role_user_id_fk2
+        foreign key (modifyBy) references user (id);
+

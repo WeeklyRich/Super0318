@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Test.mapper.BillDao">
+<mapper namespace="com.mapper.BillDao">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="Test.pojo.Bill">
+    <resultMap id="BaseResultMap" type="com.pojo.Bill">
         <id column="id" property="id" />
         <result column="billCode" property="billCode" />
         <result column="productName" property="productName" />

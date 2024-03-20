@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Test.mapper.PermissionDao">
+<mapper namespace="com.mapper.PermissionDao">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="Test.pojo.Permission">
+    <resultMap id="BaseResultMap" type="com.pojo.Permission">
         <id column="id" property="id" />
         <result column="perm_name" property="permName" />
         <result column="perm_url" property="permUrl" />
